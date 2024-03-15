@@ -142,6 +142,8 @@ class Dihedral_mono:
         self.pdb = pdb
         self.trajs = trajs
         self.n_residues = n_residues
+        ref = mda.Universe(pdb)
+        self.residues = len(ref.residues)
 
     def feature(self):
         feat = coor.featurizer(self.pdb)
@@ -160,7 +162,7 @@ class Dihedral_mono:
         B = []  # mapping ind for dihedral angles protomer B
         E = []  # list of sorted dihedral angles in protomer A
         H = []  # list of sorted dihedral angles in protomer B
-        for n in range(1, 307):
+        for n in range(1, self.residues+1):
             for i, vl in enumerate(dt):
                 if int(vl[10:]) == int(n):
                     if int(vl[4:6]) == 0:
@@ -176,7 +178,7 @@ class Dihedral_mono:
         lst = mapping_[1]
         x = []
         for n, resid in enumerate(lst_resid):
-            if resid < 307:
+            if resid < self.residues+1:
                 for i, vl in enumerate(lst):
                     if int(vl[4:6]) == 0 and int(vl[10:]) == int(resid):
                         x.append(i)
