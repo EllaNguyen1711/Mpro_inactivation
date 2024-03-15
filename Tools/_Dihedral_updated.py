@@ -259,9 +259,3 @@ def JSD_gaussian(x1, x2, weight1, weight2): #For data of torsion angles determin
     jsd = js(z1, z2)
     return jsd
 
-def JSD_histogram(x1, x2, w1, w2): #For a faster calculation!
-    N1, _ = np.histogram(x1, density=True, bins = 1000, weights=w1)
-    N2, _ = np.histogram(x2, density=True, bins = 1000, weights=w2)
-    jsd = js(N1, N2)
-    print ('Value of JSD is: ', jsd)
-    return jsd
